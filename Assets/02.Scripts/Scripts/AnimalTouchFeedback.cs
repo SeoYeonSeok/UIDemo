@@ -10,12 +10,9 @@ public class AnimalTouchFeedback : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-
-        Debug.Log(transform.childCount);
+        
         for (int i = 0; i < transform.childCount; i++)
         {
-            Debug.Log (transform.GetChild(i).name);
-
             if (transform.GetChild(i).GetComponent<ParticleSystem>() != null)
             {
                 heartEffect = transform.GetChild(i).GetComponent<ParticleSystem>();

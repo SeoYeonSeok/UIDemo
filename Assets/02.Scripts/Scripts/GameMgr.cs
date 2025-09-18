@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 public class GameMgr : MonoBehaviour
 {
-    public Camera mainCam;
+    public Camera mainCam; // 메인 카메라
     public Transform animalSpawnPos; // 에그가 해치되면 동물이 등장하는 Transform
     public GameObject uiMainMenus; // 시작 버튼을 누르면 사라지는 메인 메뉴 ui 요소들
     public GameObject uiInFields; // 에그 해치 후 등장하는 ui 요소들
     public LogoTween logoTween; // 로고에 내장된 Tween 스크립트
 
-    private int gainedAnimalNum; // 현재 얻은 동물의 숫자
-    private int gainedGold; // 현재 얻은 코인
-    private int goldCurrent = 0; // 지금까지 보유 중인 코인
-    private int animalCurrent = 0; // 지금까지 보유 중인 동물
+    [SerializeField] private int gainedAnimalNum; // 현재 얻은 동물의 숫자
+    [SerializeField] private int gainedGold; // 현재 얻은 코인
+    [SerializeField] private int goldCurrent = 0; // 지금까지 보유 중인 코인
+    [SerializeField] private int animalCurrent = 0; // 지금까지 보유 중인 동물
 
-    [Header("Egg's Elements")]
+    [Header("- Egg's Elements : 달걀과 달걀 부화 프로세스에 관련된 요소들")]
     public Button btnEggHatchBtn; // 시작 버튼
     public GameObject Egg;
     public Animator animEgg;
@@ -27,17 +27,17 @@ public class GameMgr : MonoBehaviour
     private float eggShakeSpeed = 1f;
     private GameObject hatchedAnimal;
 
-    [Header("Animals")]
+    [Header("- Animals : 동물과 관련된 요소들")]
     public GameObject[] goAnimals; // 동물 모델들 (이동이나 피드백과 같은 부분들은 없는 모델들)
-    public GameObject[] goAnimalsMoveable;
-    public Sprite[] animalIcon;
-    public Transform TrMovableAnimalSpawnPos;
+    public GameObject[] goAnimalsMoveable; // 동물 모델들 (이동이나 피드백과 같은 부분들이 있는 모델들)
+    public Sprite[] animalIcon; // 동물 아이콘 스프라이트
+    public Transform TrMovableAnimalSpawnPos; // 동물들이 필드의 이동 가능한 Nav Mesh Surface 표면으로 떨어지는 지점
 
-    [Header("Circular Wipe Effect")]
-    public Image img_circularWipeImg; // 원형 화면 전환 효과    
+    [Header("- Circular Wipe Effect")] // 원형 화면 전환 효과
+    public Image imgCircularWipeImg; // 원형 화면 전환 효과를 연출하기 위한 360도 Filled 이미지    
 
-    [Header("Field's Elements")]
-    public GameObject goField;
+    [Header("- Field's Elements")] // 필드의 요소들
+    public GameObject goField; // 필드 그 자체
     public GameObject AlertPanel; // 알림 이미지 이외의 다른 오브젝트들의 클릭/터치 입력을 막기 위한 백그라운드 겸 그룹화 목적 부모 오브젝트
     public Image alert; // 알림 이미지
     public TextMeshProUGUI TxtCurrentGold; // 현재 보유 중인 골드 수를 표현하는 텍스트
@@ -132,7 +132,7 @@ public class GameMgr : MonoBehaviour
     // 원형 화면 전환 효과 메서드
     private void CircularWipeEffectOn()
     {
-        img_circularWipeImg.gameObject.SetActive(true);
+        imgCircularWipeImg.gameObject.SetActive(true);
 
         float imgFill = 0f;
 
@@ -140,7 +140,7 @@ public class GameMgr : MonoBehaviour
         sq.Append(DOTween.To(() => imgFill, x =>
         {
             imgFill = x;
-            img_circularWipeImg.fillAmount = imgFill;
+            imgCircularWipeImg.fillAmount = imgFill;
         }, 1f, 1f).SetEase(Ease.Linear));
 
         sq.AppendInterval(2f);
@@ -170,8 +170,8 @@ public class GameMgr : MonoBehaviour
         sq1.Append(DOTween.To(() => imgFill, x =>
         {
             imgFill = x;
-            img_circularWipeImg.fillAmount = imgFill;
-        }, 0f, 1f).SetEase(Ease.Linear).OnComplete(() => img_circularWipeImg.gameObject.SetActive(false)));
+            imgCircularWipeImg.fillAmount = imgFill;
+        }, 0f, 1f).SetEase(Ease.Linear).OnComplete(() => imgCircularWipeImg.gameObject.SetActive(false)));
 
         // 시퀀스 2 : 카메라 줌업 효과 위해 FOV 값 변경 -> 알림 UI 출력
         float camFov = 90f;

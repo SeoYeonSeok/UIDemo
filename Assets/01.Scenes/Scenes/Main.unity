@@ -1661,6 +1661,10 @@ MonoBehaviour:
   uiMainMenus: {fileID: 951454891}
   uiInFields: {fileID: 1999810668}
   logoTween: {fileID: 940989562}
+  gainedAnimalNum: 0
+  gainedGold: 0
+  goldCurrent: 0
+  animalCurrent: 0
   btnEggHatchBtn: {fileID: 305596234}
   Egg: {fileID: 903181980}
   animEgg: {fileID: 903181984}
@@ -1696,7 +1700,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d5a7558d5d7b0d444b950df611b8dafc, type: 3}
   - {fileID: 21300000, guid: 0ca856ec6b90d6c4e9d00bab2eee233f, type: 3}
   TrMovableAnimalSpawnPos: {fileID: 283290440}
-  img_circularWipeImg: {fileID: 1111262351}
+  imgCircularWipeImg: {fileID: 1111262351}
   goField: {fileID: 449760485}
   AlertPanel: {fileID: 741423078}
   alert: {fileID: 679081775}
